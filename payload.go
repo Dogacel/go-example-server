@@ -3,12 +3,16 @@ package main
 import (
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
 
-	fmt.Print(r.Body)
+	b, _ := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
+
+	fmt.Print(b)
 
 	r.Header.Set(
 		"Content-Type",
