@@ -2,6 +2,7 @@ package compactweb
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"strconv"
 	"time"
@@ -28,6 +29,7 @@ func (c *Client) Bind() {
 	fmt.Println("Binding to " + c.Addr + ":" + strconv.Itoa(c.Port))
 	conn, err := net.Dial("tcp", c.Addr+":"+strconv.Itoa(c.Port))
 	if err != nil {
+		log.Fatal(err)
 		panic("Connection error !")
 	}
 
