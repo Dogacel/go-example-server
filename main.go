@@ -6,7 +6,7 @@ import (
 	"./compactweb"
 )
 
-func main() {
+func amain() {
 	fmt.Println("Started app !")
 
 	port := 8081
@@ -25,7 +25,6 @@ func main() {
 	}
 
 	go exampleServer.Listen(ok)
-
 	exampleClient.Bind(ok)
 
 }
