@@ -4,16 +4,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/http/httputil"
+	"os/exec"
 )
 
 func payloadHandler(w http.ResponseWriter, r *http.Request) {
-
-	requestDump, err := httputil.DumpRequest(r, true)
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(requestDump))
 
 	r.Header.Set(
 		"Content-Type",
@@ -22,11 +16,13 @@ func payloadHandler(w http.ResponseWriter, r *http.Request) {
 
 	io.WriteString(
 		w,
-		"Hello !",
+		"Restarting server...",
 	)
+
+	exec.Command("cd ~/go-projects/go-example-server && git pull && go run main.go server")
 }
 
-func main() {
+func amain() {
 	fmt.Println("Started !")
 	http.HandleFunc("/payload", payloadHandler)
 	http.ListenAndServe(":5050", nil)
