@@ -9,8 +9,10 @@ import (
 func main() {
 	fmt.Println("Started app !")
 
-	port := 9911
-	addr := "localhost"
+	port := 8081
+	addr := "127.0.0.1"
+
+	ok := make(chan bool)
 
 	exampleServer := compactweb.Server{
 		Addr: addr,
@@ -22,10 +24,8 @@ func main() {
 		Port: port,
 	}
 
-	go exampleServer.Listen()
+	go exampleServer.Listen(ok)
 
-	exampleClient.Bind()
-
-	exampleClient.UpdateEverySecond()
+	exampleClient.Bind(ok)
 
 }

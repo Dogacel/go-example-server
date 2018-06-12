@@ -25,13 +25,20 @@ func (c *Client) UpdateEverySecond() {
 }
 
 //Bind to the server.
-func (c *Client) Bind() {
-	fmt.Println("Binding to " + c.Addr + ":" + strconv.Itoa(c.Port))
-	conn, err := net.Dial("tcp", c.Addr+":"+strconv.Itoa(c.Port))
-	if err != nil {
-		log.Fatal(err)
-		panic("Connection error !")
-	}
+func (c *Client) Bind(ok chan bool) {
 
-	c.conn = conn
+	done := <-ok
+
+	if done {
+		conn, err := net.Dial("tcp", c.Addr+":"+strconv.Itoa(c.Port))
+		fmt.Println("Binded to " + c.Addr + ":" + strconv.Itoa(c.Port))
+		if err != nil {
+			log.Fatal(err)
+			panic("Connection error !")
+		}
+
+		c.conn = conn
+
+		c.UpdateEverySecond()
+	}
 }

@@ -14,13 +14,15 @@ type Server struct {
 }
 
 //Listen the connected clients.
-func (s *Server) Listen() {
-	fmt.Println("Listening on " + s.Addr + ":" + strconv.Itoa(s.Port))
+func (s *Server) Listen(done chan bool) {
 	listener, err := net.Listen("tcp", s.Addr+":"+strconv.Itoa(s.Port))
+	fmt.Println("Listening on " + s.Addr + ":" + strconv.Itoa(s.Port))
 	if err != nil {
 		panic("Error listening " + s.Addr + ":" + strconv.Itoa(s.Port))
 	}
 	defer listener.Close()
+
+	done <- true
 
 	for {
 		conn, _ := listener.Accept()
