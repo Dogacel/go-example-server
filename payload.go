@@ -13,7 +13,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	b, _ := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 
-	data, _ := json.Marshal(b)
+	var f interface{}
+	data := json.Unmarshal(b, &f)
 
 	fmt.Print(data)
 
