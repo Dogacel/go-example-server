@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -12,7 +14,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	b, _ := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 
-	fmt.Print(string(b))
+	rdr1 := ioutil.NopCloser(bytes.NewBuffer(b))
+	log.Printf("BODY: %q", rdr1)
 
 	r.Header.Set(
 		"Content-Type",
