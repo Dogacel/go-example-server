@@ -7,7 +7,7 @@ import (
 	"./compactweb"
 )
 
-func main() {
+func amain() {
 	if len(os.Args) > 1 {
 		typeFlag := os.Args[1]
 		if typeFlag == "server" {

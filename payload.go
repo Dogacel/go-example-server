@@ -36,7 +36,7 @@ func payloadHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(cmdOutput) // => go version go1.3 darwin/amd64
 }
 
-func amain() {
+func main() {
 	fmt.Println("Started !")
 	http.HandleFunc("/payload", payloadHandler)
 	http.ListenAndServe(":5050", nil)
