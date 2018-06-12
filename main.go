@@ -10,14 +10,15 @@ func main() {
 	fmt.Println("Started app !")
 
 	port := 9911
+	addr := "0.0.0.0"
 
 	exampleServer := compactweb.Server{
-		Addr: "localhost",
+		Addr: addr,
 		Port: port,
 	}
 
 	exampleClient := compactweb.Client{
-		Addr: "localhost",
+		Addr: addr,
 		Port: port,
 	}
 
