@@ -1,29 +1,28 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
-	"log"
 	"net/http"
+	"net/http/httputil"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
 
-	b, _ := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
-
-	rdr1 := ioutil.NopCloser(bytes.NewBuffer(b))
-	log.Printf("BODY: %q", rdr1)
+	requestDump, err := httputil.DumpRequest(r, true)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(requestDump))
 
 	r.Header.Set(
 		"Content-Type",
 		"text/html",
 	)
 
-	io.WriteString(w,
-		"Hello",
+	io.WriteString(
+		w,
+		"Hello !",
 	)
 }
 
