@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"./src/compactweb"
+	"./compactweb"
 )
 
 func main() {
