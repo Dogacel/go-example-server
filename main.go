@@ -6,7 +6,7 @@ import (
 	"./compactweb"
 )
 
-func amain() {
+func otherMain() {
 	fmt.Println("Started app !")
 
 	port := 8081
