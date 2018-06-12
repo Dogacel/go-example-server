@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,10 +12,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	b, _ := ioutil.ReadAll(r.Body)
 	defer r.Body.Close()
 
-	var f interface{}
-	data := json.Unmarshal(b, &f)
-
-	fmt.Print(data)
+	fmt.Print(string(b))
 
 	r.Header.Set(
 		"Content-Type",
