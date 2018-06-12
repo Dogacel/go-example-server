@@ -7,7 +7,7 @@ import (
 	"net/http/httputil"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func payloadHandler(w http.ResponseWriter, r *http.Request) {
 
 	requestDump, err := httputil.DumpRequest(r, true)
 	if err != nil {
@@ -28,6 +28,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	fmt.Println("Started !")
-	http.HandleFunc("/payload", handler)
+	http.HandleFunc("/payload", payloadHandler)
 	http.ListenAndServe(":5050", nil)
 }
