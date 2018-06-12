@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"net/http"
@@ -19,7 +20,20 @@ func payloadHandler(w http.ResponseWriter, r *http.Request) {
 		"Restarting server...",
 	)
 
-	exec.Command("cd ~/go-projects/go-example-server && git pull && go run main.go server")
+	// Create an *exec.Cmd
+	cmd := exec.Command(".", "/webhook.sh")
+
+	// Stdout buffer
+	cmdOutput := &bytes.Buffer{}
+	cmd.Stdout = cmdOutput
+
+	err := cmd.Run() // will wait for command to return
+
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+
+	fmt.Println(cmdOutput) // => go version go1.3 darwin/amd64
 }
 
 func amain() {

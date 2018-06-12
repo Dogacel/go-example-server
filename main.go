@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"os"
-	"os/exec"
 
 	"./compactweb"
 )
@@ -16,18 +14,10 @@ func main() {
 			fmt.Println("Server started !")
 		} else if typeFlag == "client" {
 			fmt.Println("Client started !")
-
-			cmd := exec.Command("git", "commit -m 'Test' && git push origin master")
-
-			cmdOutput := &bytes.Buffer{}
-			cmd.Stdout = cmdOutput
-
-			cmd.Start()
-			cmd.Wait()
-
-			fmt.Println(cmdOutput)
 		}
 	}
+
+	otherMain()
 }
 
 func otherMain() {
