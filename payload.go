@@ -27,7 +27,7 @@ func payloadHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Println("Started !")
+	fmt.Println("Started !!")
 	http.HandleFunc("/payload", payloadHandler)
 	http.ListenAndServe(":5050", nil)
 }
