@@ -12,15 +12,20 @@ func main() {
 		typeFlag := os.Args[1]
 		if typeFlag == "server" {
 			fmt.Println("Server started !")
+			serveHTML()
 		} else if typeFlag == "client" {
 			fmt.Println("Client started !")
 		}
 	}
-
-	otherMain()
 }
 
-func otherMain() {
+func serveHTML() {
+	server := compactweb.HTMLServer{8080}
+	server.Setup()
+	server.Start()
+}
+
+func testPorts() {
 	fmt.Println("Started app !")
 
 	port := 8081
