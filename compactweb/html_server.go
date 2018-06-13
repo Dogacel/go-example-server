@@ -1,6 +1,7 @@
 package compactweb
 
 import (
+	"io"
 	"net/http"
 	"strconv"
 )
@@ -25,5 +26,13 @@ func handleURLs() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	r.Header.Set(
+		"Content-Type",
+		"text/html",
+	)
 
+	io.WriteString(
+		w,
+		"<h1> HTML Server is up and running ! </h1>",
+	)
 }
