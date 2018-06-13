@@ -2,9 +2,8 @@ package main
 
 import (
 	"fmt"
+	"go-example-server/compactweb"
 	"os"
-
-	"./compactweb"
 )
 
 func main() {
@@ -20,7 +19,7 @@ func main() {
 }
 
 func serveHTML() {
-	server := compactweb.HTMLServer{8080}
+	server := compactweb.HTMLServer{Port: 8080}
 	server.Setup()
 	server.Start()
 }
