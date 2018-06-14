@@ -41,7 +41,7 @@ func testPorts() {
 }
 
 func serveHTML() {
-	server := HTMLServer{Port: 8080}
+	server := compactweb.HTMLServer{Port: 8080}
 	server.Setup()
 	server.Start()
 }
