@@ -1,7 +1,7 @@
-package compactweb
+package main
 
 import (
-	"io"
+	"html/template"
 	"net/http"
 	"strconv"
 )
@@ -9,6 +9,16 @@ import (
 //HTMLServer for serving a website
 type HTMLServer struct {
 	Port int
+}
+
+type todo struct {
+	Title string
+	Done  bool
+}
+
+type todoPageData struct {
+	PageTitle string
+	Todos     []todo
 }
 
 //Setup sets up the htmlserver
@@ -26,13 +36,14 @@ func handleURLs() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	r.Header.Set(
-		"Content-Type",
-		"text/html",
-	)
-
-	io.WriteString(
-		w,
-		"<h1> HTML Server is up and running ! </h1>",
-	)
+	tmpl := template.Must(template.ParseFiles("pages/index.html"))
+	data := todoPageData{
+		PageTitle: "My TODO list",
+		Todos: []todo{
+			{Title: "Task 1", Done: false},
+			{Title: "Task 2", Done: true},
+			{Title: "Task 3", Done: true},
+		},
+	}
+	tmpl.Execute(w, data)
 }

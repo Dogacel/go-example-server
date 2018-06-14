@@ -18,12 +18,6 @@ func main() {
 	}
 }
 
-func serveHTML() {
-	server := compactweb.HTMLServer{Port: 8080}
-	server.Setup()
-	server.Start()
-}
-
 func testPorts() {
 	fmt.Println("Started app !")
 
@@ -44,5 +38,10 @@ func testPorts() {
 
 	go exampleServer.Listen(ok)
 	exampleClient.Bind(ok)
+}
 
+func serveHTML() {
+	server := HTMLServer{Port: 8080}
+	server.Setup()
+	server.Start()
 }
